@@ -5,13 +5,12 @@ pipeline {
             steps {
                 sh 'mvn clean package'
             }
-        }
-
-        stage('Deploy') {
-            steps {
+            post {
+            success {
                 echo 'Now Archiving...'
                 archiveArtifacts artifacts: '**/target/*.war'
             }
+        }
         }
     }
 }
